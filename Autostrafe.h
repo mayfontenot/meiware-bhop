@@ -3,11 +3,13 @@
 
 void AutostrafeThread()
 {
+	RECT screen;
+	POINT cursor;
 	bool lastDir = false, runOnce = false;
 
 	while (!GetAsyncKeyState(VK_END))
 	{
-		if (!cheats[CHEAT_AUTOSTRAFE] || !GetAsyncKeyState(VK_XBUTTON2))
+		if (!conBools[CON_B_AUTOSTRAFE] || !GetAsyncKeyState(VK_XBUTTON2)) //if not active, then skip iteration and reset movement (only once)
 		{
 			if (runOnce)
 			{
@@ -19,20 +21,21 @@ void AutostrafeThread()
 			continue;
 		}
 
-		if (cursor.x < screen.right / 2 || cursor.x == screen.right / 2 && !lastDir)
+		GetWindowRect(GetForegroundWindow(), &screen);
+		GetCursorPos(&cursor);
+
+		if (cursor.x < screen.right / 2 || cursor.x == screen.right / 2 && !lastDir) //continue strafing towards a direction even if the mouse is not moving
 		{
 			*(int*)(client + forceRight) = 0;
 			*(int*)(client + forceLeft) = 1;
-			lastDir = false;
+			runOnce = !(lastDir = false); //sets runOnce to true and lastDir to false (left)
 		}
 		else if (cursor.x > screen.right / 2 || cursor.x == screen.right / 2 && lastDir)
 		{
 			*(int*)(client + forceLeft) = 0;
 			*(int*)(client + forceRight) = 1;
-			lastDir = true;
+			runOnce = lastDir = true;
 		}
-
-		runOnce = true;
 
 		Sleep(1);
 	}

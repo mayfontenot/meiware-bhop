@@ -12,20 +12,8 @@ void ConsoleThread()
 	freopen_s(&fConsole, "CONOUT$", "w", stdout);
 	freopen_s(&fConsole, "CONIN$", "r", stdin);
 
-	int cheatIndex = 0;
+	int conIndex = 0, conSubIndex = 0;
 	bool updateOutput = true;
-
-	cout << "CVar sensitivity: ";
-	cin >> CVAR_SENSITIVITY;
-
-	cout << "CVar m_yaw (0.022): ";
-	cin >> CVAR_M_YAW;
-
-	cout << "Smoothness (6): ";
-	cin >> smoothness;
-
-	cout << "Threshold (0.088): ";
-	cin >> threshold;
 
 	while (!GetAsyncKeyState(VK_END))
 	{
@@ -33,37 +21,62 @@ void ConsoleThread()
 		{
 			system("cls");
 
-			cout << "© 2021 Meiware.net\nEND to uninject, UP/DOWN to navigate, LEFT/RIGHT to toggle\nHold MOUSE5 to activate\n" << endl;
+			cout << "© 2021 Meiware.net\nEND to uninject, UP/DOWN to navigate, LEFT/RIGHT to change\nHold MOUSE5 to activate\n" << endl;
 
-			cout << (cheatIndex == CHEAT_AUTOSTRAFE ? "> " : "") << "Autostrafe: " << (cheats[CHEAT_AUTOSTRAFE] ? "ON" : "OFF") << endl;
-			cout << (cheatIndex == CHEAT_OPTIMIZER ? "> " : "") << "Optimizer: " << (cheats[CHEAT_OPTIMIZER] ? "ON" : "OFF") << endl;
+			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_SMOOTHNESS ? "> " : "") << "Smoothness (e.g. 40 or 50): " << conFloats[CON_FL_SMOOTHNESS] << endl;
+			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_THRESHOLD ? "> " : "") << "Threshold (e.g. 0 or 0.022): " << conFloats[CON_FL_THRESHOLD] << endl;
+			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_AUTOSTRAFE ? "> " : "") << "Autostrafe: " << (conBools[CON_B_AUTOSTRAFE] ? "ON" : "OFF") << endl;
+			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_OPTIMIZER ? "> " : "") << "Optimizer: " << (conBools[CON_B_OPTIMIZER] ? "ON" : "OFF") << endl;
 
 			updateOutput = false;
 		}
 
 		if (GetAsyncKeyState(VK_UP) & 1)
 		{
-			cheatIndex--;
+			conSubIndex--;
 
 			updateOutput = true;
 		}
 
 		if (GetAsyncKeyState(VK_DOWN) & 1)
 		{
-			cheatIndex++;
+			conSubIndex++;
 
 			updateOutput = true;
 		}
 
-		if (cheatIndex < 0)
-			cheatIndex = CHEAT_COUNT - 1;
+		if (conSubIndex < 0)
+		{
+			conSubIndex = 0;
+			conIndex--;
 
-		if (cheatIndex >= CHEAT_COUNT)
-			cheatIndex = 0;
+			updateOutput = true;
+		}
+
+		if (conSubIndex >= CON_FL_COUNT && conIndex == CON_FL_INDEX || conSubIndex >= CON_B_COUNT && conIndex == CON_B_INDEX)
+		{
+			conSubIndex = 0;
+			conIndex++;
+
+			updateOutput = true;
+		}
+
+		if (conIndex < 0)
+			conIndex = 0;
+
+		if (conIndex >= CON_INDEX_COUNT)
+			conIndex = CON_INDEX_COUNT - 1;
 
 		if (GetAsyncKeyState(VK_LEFT) & 1 || GetAsyncKeyState(VK_RIGHT) & 1)
 		{
-			cheats[cheatIndex] = !cheats[cheatIndex];
+			if (conIndex == CON_FL_INDEX)
+			{
+				cout << "\nEnter new value: ";
+				cin >> conFloats[conSubIndex];
+			}
+
+			if (conIndex == CON_B_INDEX)
+				conBools[conSubIndex] = !conBools[conSubIndex];
 
 			updateOutput = true;
 		}
@@ -71,5 +84,6 @@ void ConsoleThread()
 		Sleep(1);
 	}
 
+	fclose(fConsole);
 	FreeConsole();
 }

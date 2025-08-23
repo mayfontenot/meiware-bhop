@@ -1,8 +1,7 @@
 #pragma once
 #include "SDK.h"
 #include "Vector.h"
-
-const float PI = 3.14159274101257324219f;
+const float PI = atan(1.f) * 4.f;
 
 float NormalizeAngle(float ang)
 {
@@ -20,28 +19,29 @@ float NormalizeAngle(float ang)
 
 void OptimizerThread()
 {
-    float oldYaw = 0;
+	float oldYaw = 0, oldDelta = 0, oldSmoothness = 0;
 
 	while (!GetAsyncKeyState(VK_END))
 	{
         float yaw = *(float*)(engine + m_angAbsRotation + 0x4);
+		float idealYaw = atan2(32.8f, (*(Vector*)(client + m_vecAbsVelocity)).Length2D()) * (180.f / PI); //30.f for cs:s, 32.8f for gmod
+		float delta = abs(yaw - idealYaw);
 
-        if ((abs(yaw - oldYaw) < threshold && threshold > 0) || !GetAsyncKeyState(VK_XBUTTON2) || !cheats[CHEAT_OPTIMIZER])
-        {
-            oldYaw = yaw;
+		if (oldDelta == 0 || oldSmoothness != conFloats[CON_FL_SMOOTHNESS])
+		{
+			oldDelta = delta;
+			oldSmoothness = conFloats[CON_FL_SMOOTHNESS] * 10.f;
+		}
 
-            continue;
-        }
+		if ((abs(yaw - oldYaw) < conFloats[CON_FL_THRESHOLD] && conFloats[CON_FL_THRESHOLD] > 0) || !GetAsyncKeyState(VK_XBUTTON2) || !conBools[CON_B_OPTIMIZER]) //skip loop iteration if not active
+			continue;
 
-        int mouseX = (cursor.x - screen.right / 2) * CVAR_SENSITIVITY;
-        float idealYaw = atan2(32.8f, (*(Vector*)(client + m_vecAbsVelocity)).Length2D()) * (180.f / PI); //30.f for cs:s
+		if (*(int*)(client + forceLeft) == 1)
+			yaw += delta / (delta / (oldDelta / oldSmoothness)); //we don't want to snap to the angle, so we divide the angle by the same ratio each time for a flat change
+		else if (*(int*)(client + forceRight) == 1)
+			yaw -= delta / (delta / (oldDelta / oldSmoothness));
 
-        if (*(int*)(client + forceLeft) == 1)
-            yaw += idealYaw / smoothness + mouseX * CVAR_M_YAW;
-        else if (*(int*)(client + forceRight) == 1)
-            yaw -= idealYaw / smoothness - mouseX * CVAR_M_YAW;
-
-        *(float*)(engine + m_angAbsRotation + 0x4) = oldYaw = NormalizeAngle(yaw);
+        *(float*)(engine + m_angAbsRotation + 0x4) = oldYaw = NormalizeAngle(yaw); //sets both yaw and oldyaw towards ideal yaw
 
 		Sleep(1);
 	}
