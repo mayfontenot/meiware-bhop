@@ -1,9 +1,0 @@
-"bhop"
-{
-	"base"		"base"
-	"title"		"Bunny Hop"
-	"maps"		"^bhop_"
-	"category"	"other"
-	"menusystem"	"1"
-	"workshopid"	""
-}
