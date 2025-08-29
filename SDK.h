@@ -7,7 +7,7 @@ const unsigned long long engine = (unsigned long long)GetModuleHandleA("engine.d
 
 //addresses
 const unsigned long long forceLeft = 0xA34908;
-const unsigned long long forceRight = 0xA34918;
+const unsigned long long forceRight = forceLeft + 0x10;
 const unsigned long long m_angAbsRotation = 0x6571FC;
 const unsigned long long m_vecAbsVelocity = 0x86B110;
 
@@ -17,7 +17,7 @@ const int CON_FL_SMOOTHNESS = 0, CON_FL_THRESHOLD = 1, CON_FL_COUNT = 2;
 const int CON_B_AUTOSTRAFE = 0, CON_B_OPTIMIZER = 1, CON_B_COUNT = 2;
 
 //globals
-float conFloats[CON_FL_COUNT] = {50, 0.022};
+float conFloats[CON_FL_COUNT] = {40, 0.022};
 bool conBools[CON_B_COUNT] = {true, true};
 
 RECT screen;
@@ -34,4 +34,5 @@ void SDKThread(HINSTANCE hinstDll)
 	}
 
 	FreeLibraryAndExitThread(hinstDll, EXIT_SUCCESS);
+
 }
