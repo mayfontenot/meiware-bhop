@@ -13,8 +13,7 @@ void AutostrafeThread()
 		{
 			if (runOnce)
 			{
-				*(int*)(client + forceLeft) = 0;
-				*(int*)(client + forceRight) = 0;
+				*(int*)(client + forceLeft) = *(int*)(client + forceRight) = 0;
 				runOnce = lastDir = false;
 			}
 
@@ -26,14 +25,12 @@ void AutostrafeThread()
 
 		if (cursor.x < screen.right / 2 || cursor.x == screen.right / 2 && !lastDir) //continue strafing towards a direction even if the mouse is not moving
 		{
-			*(int*)(client + forceRight) = 0;
-			*(int*)(client + forceLeft) = 1;
+			*(int*)(client + forceLeft) = (*(int*)(client + forceRight))--;
 			runOnce = !(lastDir = false); //sets runOnce to true and lastDir to false (left)
 		}
 		else if (cursor.x > screen.right / 2 || cursor.x == screen.right / 2 && lastDir)
 		{
-			*(int*)(client + forceLeft) = 0;
-			*(int*)(client + forceRight) = 1;
+			*(int*)(client + forceRight) = (*(int*)(client + forceLeft))--;
 			runOnce = lastDir = true;
 		}
 
