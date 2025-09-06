@@ -23,7 +23,7 @@ void OptimizerThread()
 
 	while (!GetAsyncKeyState(VK_END))
 	{
-        float yaw = *(float*)(engine + m_angAbsRotation + 0x4);
+        float yaw = *(float*)(engine + m_angAbsRotation + 0x4); //base is pitch, + 0x4 is yaw because a float is 4 bytes
 		float idealYaw = atan2(32.8f, (*(Vector*)(client + m_vecAbsVelocity)).Length2D()) * (180.f / PI); //30.f for cs:s, 32.8f for gmod
 		float delta = abs(yaw - idealYaw);
 
