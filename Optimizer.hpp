@@ -36,9 +36,9 @@ void OptimizerThread()
 		if ((abs(yaw - oldYaw) < conFloats[CON_FL_THRESHOLD] && conFloats[CON_FL_THRESHOLD] > 0) || !GetAsyncKeyState(VK_XBUTTON2) || !conBools[CON_B_OPTIMIZER]) //skip loop iteration if not active
 			continue;
 
-		if (*(int*)(client + forceLeft) == 1)
+		if (*(bool*)(client + forceLeft))
 			yaw += delta / (delta / (oldDelta / oldSmoothness)); //we don't want to snap to the angle, so we divide the angle by the same ratio each time for a flat change
-		else if (*(int*)(client + forceRight) == 1)
+		else if (*(bool*)(client + forceRight))
 			yaw -= delta / (delta / (oldDelta / oldSmoothness));
 
         *(float*)(engine + m_angAbsRotation + 0x4) = oldYaw = NormalizeAngle(yaw); //sets both yaw and oldyaw towards ideal yaw
