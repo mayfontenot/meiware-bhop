@@ -5,7 +5,7 @@ void AutostrafeThread()
 {
 	RECT screen;
 	POINT cursor;
-	bool lastDir = false, runOnce = false;
+	bool runOnce = false;
 
 	while (!GetAsyncKeyState(VK_END))
 	{
@@ -21,9 +21,11 @@ void AutostrafeThread()
 		GetCursorPos(&cursor);
 
 		if (cursor.x < screen.right / 2)
-			runOnce = *(bool*)(client + forceLeft) = !(*(bool*)(client + forceRight) = false);
+			*(bool*)(client + forceLeft) = !(*(bool*)(client + forceRight) = false);
 		else if (cursor.x > screen.right / 2)
-			runOnce = *(bool*)(client + forceRight) = !(*(bool*)(client + forceLeft) = false);
+			*(bool*)(client + forceRight) = !(*(bool*)(client + forceLeft) = false);
+
+		runOnce = true;
 
 		Sleep(1);
 	}
