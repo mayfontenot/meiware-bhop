@@ -41,7 +41,7 @@ void OptimizerThread()
 		else if (*(bool*)(client + forceRight))
 			yaw -= delta / (delta / (oldDelta / oldSmoothness));
 
-        *(float*)(engine + m_angAbsRotation + 0x4) = oldYaw = NormalizeAngle(yaw); //sets both yaw and oldyaw towards ideal yaw
+        oldYaw = *(float*)(engine + m_angAbsRotation + 0x4) = NormalizeAngle(yaw); //sets both yaw and old yaw towards ideal yaw
 
 		Sleep(1);
 	}
