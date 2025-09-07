@@ -23,8 +23,8 @@ void ConsoleThread()
 
 			cout << "© 2021 Meiware.net\nEND to uninject, UP/DOWN to navigate, LEFT/RIGHT to change\nHold MOUSE5 to activate\n" << endl;
 
-			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_SMOOTHNESS ? "> " : "") << "Smoothness (e.g. 40 or 50): " << conFloats[CON_FL_SMOOTHNESS] << endl;
-			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_THRESHOLD ? "> " : "") << "Threshold (e.g. 0 or 0.022): " << conFloats[CON_FL_THRESHOLD] << endl;
+			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_SMOOTHNESS ? "> " : "") << "Smoothness (e.g. 8 or 16): " << conFloats[CON_FL_SMOOTHNESS] << endl;
+			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_THRESHOLD ? "> " : "") << "Threshold (e.g. 0, or multiply sensitivity by m_yaw): " << conFloats[CON_FL_THRESHOLD] << endl;
 			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_AUTOSTRAFE ? "> " : "") << "Autostrafe: " << (conBools[CON_B_AUTOSTRAFE] ? "ON" : "OFF") << endl;
 			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_OPTIMIZER ? "> " : "") << "Optimizer: " << (conBools[CON_B_OPTIMIZER] ? "ON" : "OFF") << endl;
 

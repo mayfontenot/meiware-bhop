@@ -17,7 +17,7 @@ const int CON_FL_SMOOTHNESS = 0, CON_FL_THRESHOLD = 1, CON_FL_COUNT = 2;
 const int CON_B_AUTOSTRAFE = 0, CON_B_OPTIMIZER = 1, CON_B_COUNT = 2;
 
 //globals
-float conFloats[CON_FL_COUNT] = {40.f, 0.022f};
+float conFloats[CON_FL_COUNT] = {8.f, 0.022f};
 bool conBools[CON_B_COUNT] = {true, true};
 
 void SDKThread(HINSTANCE hinstDll)
