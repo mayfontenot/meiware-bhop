@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void ConsoleThread()
+void ConsoleThread(HINSTANCE hinstDll)
 {
 	FILE* fConsole;
 	AllocConsole();
@@ -25,6 +25,7 @@ void ConsoleThread()
 
 			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_SMOOTHNESS ? "> " : "") << "Smoothness (e.g. 8 or 16): " << conFloats[CON_FL_SMOOTHNESS] << endl;
 			cout << (conIndex == CON_FL_INDEX && conSubIndex == CON_FL_THRESHOLD ? "> " : "") << "Threshold (e.g. 0, or multiply sensitivity by m_yaw): " << conFloats[CON_FL_THRESHOLD] << endl;
+			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_AUTOHOP ? "> " : "") << "Autohop: " << (conBools[CON_B_AUTOHOP] ? "ON" : "OFF") << endl;
 			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_AUTOSTRAFE ? "> " : "") << "Autostrafe: " << (conBools[CON_B_AUTOSTRAFE] ? "ON" : "OFF") << endl;
 			cout << (conIndex == CON_B_INDEX && conSubIndex == CON_B_OPTIMIZER ? "> " : "") << "Optimizer: " << (conBools[CON_B_OPTIMIZER] ? "ON" : "OFF") << endl;
 
@@ -86,4 +87,5 @@ void ConsoleThread()
 
 	fclose(fConsole);
 	FreeConsole();
+	FreeLibraryAndExitThread(hinstDll, EXIT_SUCCESS);
 }
