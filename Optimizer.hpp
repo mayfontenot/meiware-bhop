@@ -29,7 +29,7 @@ void OptimizerThread()
 			continue;
 
 		if (*(bool*)(CLIENT + forceLeft))
-			yaw += delta / conFloats[CON_F_SMOOTHNESS]; //we don't want to snap to the angle, so we divide the angl by how smooth we want it to be
+			yaw += delta / conFloats[CON_F_SMOOTHNESS]; //we don't want to snap to the angle, so we divide the angle by how smooth we want it to be
 		else if (*(bool*)(CLIENT + forceRight))
 			yaw -= delta / conFloats[CON_F_SMOOTHNESS];
 
@@ -39,3 +39,4 @@ void OptimizerThread()
 	}
 
 }
+
