@@ -1,3 +1,4 @@
+#include <Windows.h>
 #include "Console.hpp"
 #include "Autohop.hpp"
 #include "Autostrafe.hpp"

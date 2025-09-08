@@ -1,5 +1,5 @@
 #pragma once
-#include "SDK.hpp"
+#include "Globals.hpp"
 
 void AutohopThread()
 {
@@ -8,12 +8,12 @@ void AutohopThread()
 		if (!conBools[CON_B_AUTOHOP] || !GetAsyncKeyState(VK_SPACE)) //skip iteration if not active
 			continue;
 
-		unsigned long long hLocalPlayer = *(unsigned long long*)(client + m_hLocalPlayer);
+		unsigned long long hLocalPlayer = *(unsigned long long*)(CLIENT + m_hLocalPlayer);
 
-		if (*(int*)(client + forceJump) == 5 && !(*(int*)(hLocalPlayer + m_fFlags) & (1 << 0)))
-			*(int*)(client + forceJump) = 4; //4 releases, 5 presses
-		else if (*(int*)(client + forceJump) == 4 && *(int*)(hLocalPlayer + m_fFlags) & (1 << 0))
-			*(int*)(client + forceJump) = 5;
+		if (*(int*)(CLIENT + forceJump) == 5 && !(*(int*)(hLocalPlayer + m_fFlags) & FL_ONGROUND))
+			*(int*)(CLIENT + forceJump) = 4; //4 releases, 5 presses
+		else if (*(int*)(CLIENT + forceJump) == 4 && *(int*)(hLocalPlayer + m_fFlags) & FL_ONGROUND)
+			*(int*)(CLIENT + forceJump) = 5;
 
 		this_thread::sleep_for(chrono::milliseconds(5));
 	}

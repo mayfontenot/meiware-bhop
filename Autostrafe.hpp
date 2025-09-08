@@ -1,18 +1,18 @@
 #pragma once
-#include "SDK.hpp"
+#include "Globals.hpp"
+
+RECT screen;
+POINT cursor;
+bool runOnce = false;
 
 void AutostrafeThread()
 {
-	RECT screen;
-	POINT cursor;
-	bool runOnce = false;
-
 	while (!GetAsyncKeyState(VK_END))
 	{
 		if (!conBools[CON_B_AUTOSTRAFE] || !GetAsyncKeyState(VK_XBUTTON2)) //if not active, then skip iteration and reset movement (only once)
 		{
 			if (runOnce)
-				runOnce = *(bool*)(client + forceLeft) = *(bool*)(client + forceRight) = false;
+				runOnce = *(bool*)(CLIENT + forceLeft) = *(bool*)(CLIENT + forceRight) = false;
 
 			continue;
 		}
@@ -21,9 +21,9 @@ void AutostrafeThread()
 		GetCursorPos(&cursor);
 
 		if (cursor.x < screen.right / 2)
-			*(bool*)(client + forceLeft) = !(*(bool*)(client + forceRight) = false);
+			*(bool*)(CLIENT + forceLeft) = !(*(bool*)(CLIENT + forceRight) = false);
 		else if (cursor.x > screen.right / 2)
-			*(bool*)(client + forceRight) = !(*(bool*)(client + forceLeft) = false);
+			*(bool*)(CLIENT + forceRight) = !(*(bool*)(CLIENT + forceLeft) = false);
 
 		runOnce = true;
 
