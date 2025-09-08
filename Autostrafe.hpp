@@ -27,6 +27,6 @@ void AutostrafeThread()
 
 		runOnce = true;
 
-		Sleep(1);
+		this_thread::sleep_for(chrono::milliseconds(1));
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "SDK.hpp"
 #include "Vector.hpp"
+
 const float PI = atan(1.f) * 4.f;
 
 float NormalizeAngle(float ang)
@@ -37,6 +38,6 @@ void OptimizerThread()
 
         oldYaw = *(float*)(engine + m_angAbsRotation + 0x4) = NormalizeAngle(yaw); //sets both yaw and old yaw towards ideal yaw
 
-		Sleep(1);
+		this_thread::sleep_for(chrono::milliseconds(1));
 	}
 }

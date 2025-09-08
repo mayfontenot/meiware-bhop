@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <thread>
 
 //modules
 const unsigned long long client = (unsigned long long)GetModuleHandleA("client.dll");

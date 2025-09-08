@@ -8,7 +8,7 @@ void ConsoleThread(HINSTANCE hinstDll)
 {
 	FILE* fConsole;
 	AllocConsole();
-	SetConsoleTitleA("Meiware Bunny Hop v2025.08.28 (x64)");
+	SetConsoleTitleA("Meiware Bunny Hop v2025.09.01 (x64)");
 	freopen_s(&fConsole, "CONOUT$", "w", stdout);
 	freopen_s(&fConsole, "CONIN$", "r", stdin);
 
@@ -82,7 +82,7 @@ void ConsoleThread(HINSTANCE hinstDll)
 			updateOutput = true;
 		}
 
-		Sleep(1);
+		this_thread::sleep_for(chrono::milliseconds(5));
 	}
 
 	fclose(fConsole);
