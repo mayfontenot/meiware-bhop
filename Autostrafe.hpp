@@ -1,12 +1,12 @@
 #pragma once
 #include "Globals.hpp"
 
-RECT screen;
-POINT cursor;
-bool runOnce = false;
-
 void AutostrafeThread()
 {
+	RECT screen;
+	POINT cursor;
+	bool runOnce = false;
+
 	while (!GetAsyncKeyState(VK_END))
 	{
 		if (!conBools[CON_B_AUTOSTRAFE] || !GetAsyncKeyState(VK_XBUTTON2)) //if not active, then skip iteration and reset movement (only once)

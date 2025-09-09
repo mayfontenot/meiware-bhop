@@ -15,6 +15,6 @@ void AutohopThread()
 		else if (*(int*)(CLIENT + forceJump) == 4 && *(int*)(hLocalPlayer + m_fFlags) & FL_ONGROUND)
 			*(int*)(CLIENT + forceJump) = 5;
 
-		this_thread::sleep_for(chrono::milliseconds(5));
+		this_thread::sleep_for(chrono::milliseconds(1));
 	}
 }

@@ -24,12 +24,9 @@ const unsigned long long m_angAbsRotation = 0x6571FC;
 const unsigned long long m_fFlags = 0x440;
 
 //constant globals
-const int CON_F_INDEX = 0, CON_B_INDEX = 1, CON_INDEX_COUNT = 2;
-const int CON_F_SMOOTHNESS = 0, CON_F_THRESHOLD = 1, CON_F_COUNT = 2;
 const int CON_B_AUTOHOP = 0, CON_B_AUTOSTRAFE = 1, CON_B_OPTIMIZER = 2, CON_B_COUNT = 3;
 const int FL_ONGROUND = (1 << 0);
 const float PI = atan(1.f) * 4.f;
 
 //globals
-float conFloats[CON_F_COUNT] = {8.f, 0.022f};
 bool conBools[CON_B_COUNT] = {false, true, true};
