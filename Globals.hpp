@@ -18,7 +18,7 @@ const unsigned long long m_vecAbsVelocity = 0x86C110;
 const unsigned long long m_hLocalPlayer = 0x948770;
 
 //engine addresses
-const unsigned long long m_angAbsRotation = 0x6571FC;
+const unsigned long long m_angAbsRotation = 0x6581FC;
 
 //offsets
 const unsigned long long m_fFlags = 0x440;
@@ -29,4 +29,5 @@ const int FL_ONGROUND = (1 << 0);
 const float PI = atan(1.f) * 4.f;
 
 //globals
+
 bool conBools[CON_B_COUNT] = {false, true, true};
