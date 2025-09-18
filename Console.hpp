@@ -8,7 +8,7 @@ void ConsoleThread(HINSTANCE hinstDll)
 	bool updateOutput = true;
 
 	AllocConsole();
-	SetConsoleTitleA("Meiware Bunny Hop v2025.09.01 (x64)");
+	SetConsoleTitleA("Meiware Bunny Hop v2025.09.17 (x64)");
 	freopen_s(&fConsole, "CONOUT$", "w", stdout);
 	freopen_s(&fConsole, "CONIN$", "r", stdin);
 
@@ -18,7 +18,7 @@ void ConsoleThread(HINSTANCE hinstDll)
 		{
 			system("cls");
 
-			cout << "© 2021 Meiware.net\nEND to uninject, UP/DOWN to navigate, LEFT/RIGHT to change\nHold MOUSE5 to activate\n" << endl;
+			cout << "Â© 2021 Meiware.net\nEND to uninject, UP/DOWN to navigate, LEFT/RIGHT to change\nHold MOUSE5 to activate\n" << endl;
 
 			cout << (conIndex == CON_B_AUTOHOP ? "> " : "") << "Autohop: " << (conBools[CON_B_AUTOHOP] ? "ON" : "OFF") << endl;
 			cout << (conIndex == CON_B_AUTOSTRAFE ? "> " : "") << "Autostrafe: " << (conBools[CON_B_AUTOSTRAFE] ? "ON" : "OFF") << endl;
@@ -63,4 +63,5 @@ void ConsoleThread(HINSTANCE hinstDll)
 	fclose(fConsole);
 	FreeConsole();
 	FreeLibraryAndExitThread(hinstDll, EXIT_SUCCESS);
+
 }
