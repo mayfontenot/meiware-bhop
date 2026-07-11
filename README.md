@@ -1,5 +1,5 @@
-# Description
-A Garry's Mod Bunny Hop MultiHack
+# Garry's Mod BunnyHop MultiHack
+A Garry's Mod BunnyHop MultiHack
 
 ## Features
 Auto hop, auto strafe, strafe optimizer, key press sleep randomizer
