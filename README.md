@@ -2,7 +2,7 @@
 A Garry's Mod Bunny Hop MultiHack
 
 ## Features
-Auto hop, auto strafe, and strafe optimizer
+Auto hop, auto strafe, strafe optimizer, key press sleep randomizer
 
 ## Installation
 1. Compile the source code (or use the provided binary)
